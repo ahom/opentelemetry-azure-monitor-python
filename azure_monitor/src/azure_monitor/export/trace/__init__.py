@@ -62,7 +62,7 @@ class AzureMonitorSpanExporter(BaseExporter, SpanExporter):
         )
         parent = span.parent
         if isinstance(parent, Span):
-            parent = parent.context
+            parent = parent.get_context()
         if parent:
             envelope.tags["ai.operation.parentId"] = "{:016x}".format(
                 parent.span_id

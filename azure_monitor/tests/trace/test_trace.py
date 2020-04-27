@@ -11,7 +11,7 @@ from unittest import mock
 # pylint: disable=import-error
 from opentelemetry.sdk.trace import Span
 from opentelemetry.sdk.trace.export import SpanExportResult
-from opentelemetry.trace import Link, SpanContext, SpanKind
+from opentelemetry.trace import Link, SpanContext, SpanKind, DefaultSpan
 from opentelemetry.trace.status import Status, StatusCanonicalCode
 
 from azure_monitor.export import ExportResult
@@ -175,8 +175,7 @@ class TestAzureExporter(unittest.TestCase):
             storage_path=os.path.join(TEST_FOLDER, self.id()),
         )
 
-        parent_span = Span(
-            name="test",
+        parent_span = DefaultSpan(
             context=SpanContext(
                 trace_id=36873507687745823477771305566750195431,
                 span_id=12030755672171557338,
